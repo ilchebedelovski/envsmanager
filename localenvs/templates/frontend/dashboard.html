@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Local Environments</title>
+	<link rel="stylesheet" media='all' type="text/css" href="/media/css/style.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = jQuery.trim(cookies[i]);
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+		
+		function csrfSafeMethod(method) {
+		    // these HTTP methods do not require CSRF protection
+		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		$.ajaxSetup({
+		    beforeSend: function(xhr, settings) {
+		        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+		            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+		        }
+		    }
+		});
+		
+		$(function(){
+			$('a.remove-link').each(function(){
+				$(this).click(function(){
+					if(confirm('Are you sure want to remove the environment?')) {
+						var value = $(this).parent().siblings('.env-table-name-val').children('a').text();
+						$.ajax({
+							type: "POST",
+							url: "/localenvs/removeenv/",
+							cache: false,
+							data: {envname: value},
+							dataType: 'json',
+							success: function(data) {
+								if(data.success == true) {
+									$(".env-remove-message").css({'border':'2px solid #9ACD32', 'border-radius':'4px', 'height':'20px', 'margin-bottom':'10px', 'padding':'5px 0 2px 15px'});
+									$(".env-remove-message").html(data.message);
+									window.setTimeout('location.reload()', 5000)
+								}
+								else {
+									$(".env-remove-message").css({'border':'2px solid #b22222', 'border-radius':'4px', 'height':'20px', 'margin-bottom':'10px', 'padding':'5px 0 2px 15px'});
+									$(".env-remove-message").html(data.message);
+									window.setTimeout('location.reload()', 5000)
+								}
+							},
+						});
+					}
+					else {
+						window.location.href = "/localenvs/dashboard/"
+					}
+				});	
+			})
+		});
+		
+		
+		/*
+		$(function(){
+			$('a.import-link').each(function(){
+				$(this).click(function(){
+					var value = $(this).parent().siblings('.env-table-name-val').children('a').text();
+					var envtype = $(this).parent().parent().parent().parent().siblings('.env-edit-header').children('a').text();
+					var divName = ".import-form-" + envtype;
+					$(divName).css({'display':'block'});
+					//console.log(divName);
+					
+					
+					$.ajax({
+						type: "POST",
+						url: "/localenvs/importenv/",
+						cache: false,
+						data: {envname: value},
+						dataType: 'json',
+						success: function(data) {
+							
+						}
+					});
+					
+				});
+			});
+		});
+		*/
+		
+		$(function(){
+			$('a.backup-link').each(function(){
+				$(this).click(function(){
+					var value = $(this).parent().siblings('.env-table-name-val').children('a').text();
+					if(confirm('Create backup for ' + value + '?')) {
+						$.ajax({
+							type: "POST",
+							url: "/localenvs/backupenv/",
+							cache: false,
+							data: {envname: value},
+							dataType: 'json',
+							success: function(data) {
+								if(data.success == true) {
+									$(".env-remove-message").css({'border':'2px solid #9ACD32', 'border-radius':'4px', 'height':'20px', 'margin-bottom':'10px', 'padding':'5px 0 2px 15px'});
+									$(".env-remove-message").html(data.message);
+									window.setTimeout('location.reload()', 5000)
+								}
+								else {
+									$(".env-remove-message").css({'border':'2px solid #b22222', 'border-radius':'4px', 'height':'20px', 'margin-bottom':'10px', 'padding':'5px 0 2px 15px'});
+									$(".env-remove-message").html(data.message);
+									window.setTimeout('location.reload()', 5000)
+								}
+							}
+						});
+					}
+					else {
+						window.location.href = "/localenvs/dashboard/"
+					}
+				});
+			});	
+		});
+		
+		
+		function gitEnvLink(clicked_id) {
+			
+			
+			
+		}
+		
+		$(function(){
+			$('a.git-link').each(function(){
+				$(this).click(function(){
+					var envName = $(this).parent().siblings('.env-table-name-val').children('a').text();
+					var envtype = $(this).parent().parent().parent().parent().siblings('.env-edit-header').children('a').text();
+					var divName = ".git-preview-" + envtype;
+
+					$(divName).css({'display':'block'});
+					$('.git-env-name').html(value);	
+					$('.git-env-button-status').html('<input type="submit" id="git-status-btn-' + envName + '" class="env-button-grey" name="submit" value="Status" />');
+					$('.git-env-button-log').html('<input type="submit" id="git-log-btn-' + envName + '" class="env-button-grey" name="submit" value="Log" />');
+
+				});
+			});	
+		});	
+		
+		var showStatusBlock = true;
+		
+		$(function(){
+			$('.git-status-btn').each(function(){
+				$(this).click(function(){
+					
+					var envName = $(this).parent().siblings('.git-env-name').text();
+					var envProject = $(this).parent().siblings('.git-env-project').text();
+					var elementClass = '#git-status-ul-' + envProject
+					
+					$('.git-status-ul').show();
+					$('.git-log-ul').hide();
+					
+					if (showStatusBlock == true) {
+						
+						$.ajax({
+							type: "POST",
+							url: "/localenvs/gitenv/",
+							cache: false,
+							data: {envname: envName, gitoption: 'status'},
+							dataType: 'json',
+							success: function(data) {
+								for (var i = 0; i < data.length; i++){
+									$(elementClass).append($('<li></li>', { text: data[i] }));
+								}
+							}
+						});
+						showStatusBlock = false;
+						
+					}
+				});
+				
+			});
+		});
+		
+		var showLogBlock = true;
+		
+		$(function(){
+			$('.git-log-btn').each(function(){
+				$(this).click(function(){
+
+					var envName = $(this).parent().siblings('.git-env-name').text();
+					var envProject = $(this).parent().siblings('.git-env-project').text();
+					var elementClass = '#git-status-ul-' + envProject
+					
+					$('.git-log-ul').show();
+					$('.git-status-ul').hide();
+					
+					if (showLogBlock == true) {
+						
+						$.ajax({
+							type: "POST",
+							url: "/localenvs/gitenv/",
+							cache: false,
+							data: {envname: envName, gitoption: 'log'},
+							dataType: 'json',
+							success: function(data) {
+								for (var i = 0; i < data.length; i++){
+									$(elementClass).append($('<li></li>', { text: data[i] }));
+								}
+							}
+						});
+						showLogBlock = false;
+						
+					}
+				});
+			});
+		});
+		
+	</script>
+</head>
+<body>
+<div class="envs-header">
+	<div class="envs-logout">
+		<a href="/localenvs/logout">Log Out</a>
+	</div>
+	<div class="env-remove-message"></div>
+</div>
+<div>
+{% for key, value in envs %}
+	<form class='env-edit-form' name='manageEnv' action='/localenvs/formresolution/' method='post'>
+	{% csrf_token %} <!-- this is required for form initialization -->
+			<div class='env-edit-header'>
+				<a>{{ key }}</a>
+			</div>
+			<table class='env-edit-table'>
+				<tr class='env-edit-table-tr'>
+					<td>Name</td>
+					<td>Path</td>
+					<td>Domain</td>
+					<td>Database</td>
+					<td>Action</td>
+				</tr>
+				{% for v in value %}
+				<tr class='env-edit-table-tr-content'>
+						<td class="env-table-name-val" ><a>{{ v.name }}</a></td>
+						<td><a>{{ v.path }}</a></td>
+						<td><a>{{ v.domain }}</a></td>
+						<td><a>{{ v.dbname }}</a></td>
+						<td><a class='env-edit-delete-style remove-link'>Remove</a> | <a class='env-edit-delete-style git-link' id="git-link-{{ v.name }}" onClick="gitEnvLink(this.id)">Git</a> | <a class='env-edit-delete-style backup-link'>Backup</a> | <a class='env-edit-delete-style import-link'>Import</a></td>
+				</tr>
+				{% endfor %}
+				<tr class='env-edit-table-tr-input'>
+					<td><input name='env_name' type='text' pattern="[a-zA-Z0-9]{3,15}" required value="{{ env_name }}"/></td>
+					<td><a class='env-edit-table-a-append'>/home/html/ecomwiseenvs/{{ key }}/</a><input name='env_path' type='text' pattern="[a-zA-Z0-9]{3,15}" required value="{{ env_path }}" /></td>
+					<td><a class='env-edit-table-a-append'>www.</a><input name='env_domain' type='text' pattern="[a-zA-Z0-9]{3,20}" required value="{{ env_domain }}" /><a class='env-edit-table-a-append'>.{{ key }}.com</a></td>
+					<td><a class='env-edit-table-a-append'>dev_{{ key }}_</a><input name='env_dbname' pattern="^[a-z]{3,15}_\d{10}$" required type='text' value="{{ env_dbname }}" /></td>
+					<td class='env-edit-table-td-input' >
+						<input type='hidden' name='env_radio' value='{{ key }}' />
+						<input type='submit' id='env-button' name='submit' value='Add' />
+					</td>
+				</tr>
+			</table>
+		</form>
+		</br>
+		<div class="import-form-dashboard import-form-{{ key }}" style="display: none;">
+			<form method='post'>
+			{% csrf_token %}
+				<table class="env-import-table">
+					<tr class="env-import-table-tr">
+						<td>Whole archive name</td>
+						<td><input type='text' /></td>
+					</tr>	
+					<tr class="env-import-table-tr">
+						<td>Whole db file name</td>
+						<td><input type='text' /></td>
+					</tr>			
+					<tr>
+						<td></td>
+						<td><input type='submit' id='env-button' name='submit' value='Import' /></td>
+					</tr>	
+				</table>
+			</form>
+		</div>
+		<div class="git-preview-dashboard git-preview-{{ key }}" style="display: none;">
+			<div>
+				<table>
+					<tr>
+						<td><p>Git options for </p></td>
+						<td class='git-env-name' ></td>
+						<td>in</td>
+						<td class='git-env-project' >{{ key }}</td>
+						<td class='git-env-button-status'></td>
+						<td class='git-env-button-log'></td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<ul class="git-status-ul" id="git-status-ul-{{ key }}"></ul>
+				<ul class="git-log-ul" id="git-log-ul-{{ key }}"></ul>
+			</div>
+		</div>
+		</br>
+{% endfor %}
+</div>
+</body>
+</HTML>

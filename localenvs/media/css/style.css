@@ -1,0 +1,307 @@
+body {
+	font-family: Arial,sans-serif; 
+	font-size: 14px; 
+	color: #333333	
+}
+
+.envs-header {
+	
+}
+
+.envs-logout {
+	padding: 5px 20px 10px 5px;
+    text-align: right;
+}
+
+.localenvs-header {
+	background-color: #205081;
+    height: 40px;
+    padding-top: 10px;
+    width: 100%;
+}
+
+.localenvs-header h3 {
+	color: white;
+	margin: 5px 0 0 30px;
+}
+
+.env-edit-form {}
+
+.env-edit-table {
+	width: 100%
+}
+
+.env-edit-table-tr {
+	height: 24px; 
+	background-color: #fff; 
+	font-size: 12px; 
+	font-weight: bold; 
+	color: #707070; 
+	font-weight: bold;
+}
+
+.env-edit-table-tr td {
+	/*width: 320px;*/
+	width: auto; 
+	border-bottom: 1px solid #cccccc; 
+	padding: 5px 7px
+}
+
+
+.env-edit-table-tr-content {
+	background-color: #FFF; 
+	font-size: 13px; 
+	color: #333333; 
+	display: table-row; 
+	vertical-align: inherit; 
+	border-color: inherit;
+}
+
+.env-edit-table-tr-content td {
+	/*width: 320px;*/
+	width: auto; 
+	padding: 5px 7px; 
+	text-align: left; 
+	vertical-align: top; 
+	border-bottom: 1px solid #cccccc;
+}
+
+.env-edit-table-tr-content a {
+	font-size: 12px; 
+	color: #707070;
+}
+
+.env-edit-header {
+	width: 100%; 
+	background-color: #3b73af; 
+	height: 24px; 
+	color: #fff; 
+	line-height: 1.6; 
+}
+
+.env-edit-header a {
+	font-weight: bold;
+	padding-left: 10px;
+	line-height: 1.7;
+}
+
+.env-edit-table-td-input {
+	height: 24px; 
+	background-color: #fff; 
+	font-size: 12px; 
+	font-weight: bold; 
+	color: #707070; 
+	font-weight: bold;
+}
+
+.env-edit-table-a-append {
+	font-weight: normal;
+	padding-right: 3px;
+	font-size: 13px;
+}
+
+.env-edit-table-tr-input td {
+	padding: 5px 7px
+}
+
+.env-edit-table-tr-input td input {
+	width: 130px; 
+	color: #333; 
+	line-height: 1.2; 
+	padding: 2px 7px; 
+	border-radius: 5px;
+}
+
+#env-button {
+	background-color: #3b7fc4;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: rgba(255,255,255,0.1) 0 1px 0 0 inset,rgba(0,0,0,0.2) 0 1px 1px 0;
+    border: 0;
+    width: 72px;
+    height: 29px;
+    line-height: 1.45;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+.env-button-grey {
+	background-color: #a9a9a9;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: rgba(255,255,255,0.1) 0 1px 0 0 inset,rgba(0,0,0,0.2) 0 1px 1px 0;
+    border: 0;
+    width: 72px;
+    height: 29px;
+    line-height: 1.45;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+.env-edit-delete-style {
+	color: #3b73af;
+	cursor: pointer;
+}
+
+.env-edit-select {
+	border: 1px solid #ccc;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.env-import-table-tr {
+	background-color: #fff;
+    border-color: inherit;
+    color: #333333;
+    display: table-row;
+    font-size: 13px;
+    vertical-align: inherit;
+}
+
+.git-log-ul {
+	background-color: #dcdcdc;
+    border: 1px solid #c0c0c0;
+    border-radius: 7px;
+    padding: 12px 0 12px 30px;
+    display: none;
+}
+
+.git-log-ul li {
+	list-style: outside none none;
+	color: #696969;
+}
+
+.git-status-ul {
+	background-color: #dcdcdc;
+    border: 1px solid #c0c0c0;
+    border-radius: 7px;
+    padding: 12px 0 12px 30px;
+    display: none;
+}
+
+.git-status-ul li {
+	list-style: outside none none;
+	color: #696969;
+}
+
+/****************** submitform.html *******************/
+
+.localenvs-header a {
+	color: white;
+    font-family: Arial,sans-serif;
+    font-size: 14px;
+    padding-left: 30px;
+    padding-right: 10px;
+}
+
+/****************** submitform.html *******************/
+
+
+/****************** login.html *******************/
+
+.login-gadget-right {
+	margin-top: 15px;
+	width: 45%;
+	height: 350px;
+	right: 0;
+	float: right;
+	margin-right: 20px;
+}
+
+.login-gadget-left {
+	margin-top: 15px;
+	width: 45%;
+	height: 350px;
+	right: 0;
+	float: left;
+	margin-left: 20px;
+}
+
+.login-gadget-left h3 {
+	margin-left: 15px;
+}
+
+.login-header {
+	background-color: #3b73af;
+	border-color: #ddd #ddd;
+	border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-width: 1px 1px 0;
+    min-height: 24px;
+}
+
+.login-header h3 {
+	color: #fff;
+	background: none repeat scroll 0 0 transparent;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.66667;
+    margin: 0;
+    padding: 4px 64px 4px 10px;
+}
+
+.login-content {
+	background: none repeat scroll 0 0 #fff;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-color: -moz-use-text-color #ddd #ddd;
+    border-image: none;
+    border-right: 1px solid #ddd;
+    border-style: none solid solid;
+    border-width: 0 1px 1px;
+    height: 170px;
+    padding-top: 40px;
+}
+
+.login-fields {
+	margin: 1px 0;
+    padding: 4px 0 4px 145px;
+}
+
+.login-fields label {
+	height: 20px;
+    line-height: 1.42857;
+    padding: 4px 5px;
+	float: left;
+    margin-left: -145px;
+    padding: 3px 0 0;
+    position: relative;
+    text-align: right;
+    width: 130px;
+    word-wrap: break-word;
+}
+
+.login-fields input {
+	border: 1px solid #ccc;
+    border-radius: 3.01px;
+    box-shadow: 0 1px 3px #ccc inset;
+    box-sizing: border-box;
+    font-size: inherit;
+    margin: 0;
+    max-width: 170px;
+    vertical-align: baseline;
+    width: 100%;	
+    height: 28px;
+}
+
+#login-submit {
+	background: linear-gradient(to bottom, #fff 0px, #f2f2f2 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #ccc;
+    border-radius: 3.01px;
+    box-sizing: border-box;
+    color: #333;
+    cursor: pointer;
+    font-weight: normal;
+    height: 2.14286em;
+    margin: 0;
+    padding: 4px 10px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 white;
+    vertical-align: baseline;
+    white-space: nowrap;
+    border-color: #999;
+    width: 60px;
+}
+
+/****************** login.html *******************/

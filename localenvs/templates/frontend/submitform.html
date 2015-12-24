@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Submit Form</title>
+	<link rel="stylesheet" media='all' type="text/css" href="/media/css/style.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="localenvs-header">
+		<a>{{ returnText }}</a><a>{{ returnMessage }}</a>
+		<input type='submit' id='env-button' name='submit' onClick="location.href='/localenvs/{{ returnPage }}/'" value='Back' />
+	</div>
+</body>
+</HTML>
