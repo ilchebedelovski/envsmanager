@@ -18,6 +18,10 @@ A step by step series of examples that tell you how to get a development env run
 
 Clone the repository and update the settings.py file for the database configuration.
 
+For starting the application please use:
+
+`$ python manage.py runserver`
+
 ## Built With
 
 * [Django](https://www.djangoproject.com/) - The web framework used
